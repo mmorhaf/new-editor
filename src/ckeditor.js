@@ -3,9 +3,11 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor.js';
-import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment.js';
+import AutoImage from '@ckeditor/ckeditor5-image/src/autoimage.js';
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat.js';
 import AutoLink from '@ckeditor/ckeditor5-link/src/autolink.js';
+import Autosave from '@ckeditor/ckeditor5-autosave/src/autosave.js';
+import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter.js';
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote.js';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold.js';
 import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices.js';
@@ -48,7 +50,6 @@ import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph.js';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice.js';
 import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat.js';
 import SelectAll from '@ckeditor/ckeditor5-select-all/src/selectall.js';
-import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter.js';
 import SourceEditing from '@ckeditor/ckeditor5-source-editing/src/sourceediting.js';
 import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters.js';
 import SpecialCharactersArrows from '@ckeditor/ckeditor5-special-characters/src/specialcharactersarrows.js';
@@ -74,15 +75,16 @@ import Title from '@ckeditor/ckeditor5-heading/src/title.js';
 import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
 import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline.js';
 import WordCount from '@ckeditor/ckeditor5-word-count/src/wordcount.js';
-import EditorWatchdog from '@ckeditor/ckeditor5-watchdog/src/editorwatchdog.js';
 
 class Editor extends ClassicEditor {}
 
 // Plugins to include in the build.
 Editor.builtinPlugins = [
-	Alignment,
+	AutoImage,
 	Autoformat,
 	AutoLink,
+	Autosave,
+	Base64UploadAdapter,
 	BlockQuote,
 	Bold,
 	CloudServices,
@@ -125,7 +127,6 @@ Editor.builtinPlugins = [
 	PasteFromOffice,
 	RemoveFormat,
 	SelectAll,
-	SimpleUploadAdapter,
 	SourceEditing,
 	SpecialCharacters,
 	SpecialCharactersArrows,
@@ -157,74 +158,46 @@ Editor.builtinPlugins = [
 Editor.defaultConfig = {
 	toolbar: {
 		items: [
-			'alignment',
-			'autoformat',
-			'autolink',
-			'blockquote',
-			'bold',
-			'cloudservices',
-			'code',
-			'codeblock',
-			'datafilter',
-			'dataschema',
-			'essentials',
-			'findandreplace',
-			'|',
-			'font',
-			'|',
-			'generalhtmlsupport',
 			'heading',
-			'highlight',
-			'horizontalline',
-			'htmlcomment',
-			'htmlembed',
-			'image',
 			'|',
-			'indent',
-			'indentblock',
+			'bold',
 			'italic',
 			'link',
-			'linkimage',
-			'list',
-			'listproperties',
-			'markdown',
-			'mediaembed',
-			'mediaembedtoolbar',
-			'mention',
-			'pagebreak',
-			'paragraph',
-			'pastefromoffice',
-			'removeformat',
-			'selectall',
-			'simpleuploadadapter',
-			'sourceediting',
-			'specialcharacters',
-			'specialcharactersarrows',
-			'specialcharacterscurrency',
-			'specialcharactersessentials',
-			'specialcharacterslatin',
-			'specialcharactersmathematical',
-			'specialcharacterstext',
-			'standardeditingmode',
-			'strikethrough',
-			'style',
+			'bulletedList',
+			'numberedList',
 			'|',
-			'fontbackgroundcolor',
-			'fontcolor',
-			'fontfamily',
-			'fontsize',
+			'outdent',
+			'indent',
 			'|',
-			'subscript',
+			'imageUpload',
+			'blockQuote',
+			'insertTable',
+			'mediaEmbed',
+			'undo',
+			'redo',
+			'selectAll',
+			'fontBackgroundColor',
+			'fontColor',
+			'fontFamily',
+			'fontSize',
+			'highlight',
+			'horizontalLine',
+			'imageInsert',
+			'removeFormat',
+			'pageBreak',
+			'sourceEditing',
+			'specialCharacters',
+			'restrictedEditingException',
 			'superscript',
-			'table',
-			'|',
-			'textpartlanguage',
-			'texttransformation',
-			'title',
-			'todolist',
+			'subscript',
+			'findAndReplace',
+			'codeBlock',
+			'code',
 			'underline',
-			'wordcount'
-		
+			'todoList',
+			'textPartLanguage',
+			'strikethrough',
+			'style'
 		]
 	},
 	language: 'ar',
@@ -235,12 +208,7 @@ Editor.defaultConfig = {
 			'imageStyle:inline',
 			'imageStyle:block',
 			'imageStyle:side',
-			'linkImage',
-			'imagecaption',
-			'imageinsert',
-			'imageresize',
-			'imagetoolbar',
-			'imageupload',
+			'linkImage'
 		]
 	},
 	table: {
@@ -249,12 +217,9 @@ Editor.defaultConfig = {
 			'tableRow',
 			'mergeTableCells',
 			'tableCellProperties',
-			'tableProperties',
-			'tablecaption',
-			'tablecolumnresize',
-			'tabletoolbar',
+			'tableProperties'
 		]
 	}
 };
 
-export default { Editor, EditorWatchdog };
+export default Editor;
